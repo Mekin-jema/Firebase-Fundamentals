@@ -2,7 +2,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  GoogleAuthProvider, // for google sign-in
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { useState } from "react";
 import { app } from "./ConfigureFirebase";
@@ -12,8 +13,7 @@ import SignIn from "./SignIn";
 const Authentication = () => {
   const [toggleSignUp, setToggleSignUp] = useState(true);
   const auth = getAuth();
-  // for google sign-in
-  const googleProvider = new GoogleAuthProvider();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -67,6 +67,7 @@ const Authentication = () => {
     <div className=" flex flex-col max-w-md mx-auto bg-green-100  rounded-xl shadow-lg py-6 px-3 border-2">
       <div className=" flex gap-32 p-5 items-center mx-auto items-center">
         <button
+          type="button"
           className="  border border-green-700 hover:bg-green-500 hover:text-white hover:border-white  rounded-lg p-2 transition:all duration-500 ease-in-out"
           onClick={() => {
             setToggleSignUp(true);
@@ -75,6 +76,7 @@ const Authentication = () => {
           Sign-up
         </button>
         <button
+          type="button"
           className="  border border-green-700  rounded-lg p-2 hover:bg-green-500 hover:text-white hover:border-whitetransition:all duration-500 ease-in-out"
           onClick={() => {
             setToggleSignUp(false);
