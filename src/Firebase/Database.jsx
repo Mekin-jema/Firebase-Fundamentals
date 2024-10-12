@@ -5,6 +5,7 @@ import {
   getDocs,
   updateDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 export const addUserToDatabase = async (username, email, password) => {
   try {
@@ -32,4 +33,10 @@ export const updateData = (id) => {
   });
   console.log("user id is updted successfully");
   // Update the document with id
+};
+
+export const deleteData = (id) => {
+  const docToDelete = doc(db, "users", id);
+  alert("Document deleted successfully");
+  deleteDoc(docToDelete);
 };

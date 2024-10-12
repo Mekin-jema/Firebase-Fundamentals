@@ -8,7 +8,7 @@ import { useState } from "react";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 
-import { addUserToDatabase, getData, updateData } from "./Database";
+import { addUserToDatabase, getData, updateData, deleteData } from "./Database";
 const Authentication = () => {
   const [toggleSignUp, setToggleSignUp] = useState(true);
   const auth = getAuth();
@@ -31,10 +31,11 @@ const Authentication = () => {
     const username = formData.username;
     // Firebase Authentication createUserWithEmailAndPassword
     addUserToDatabase(username, email, password);
-    const id = "EZpMLtBXp3J04tdPA1iM";
+    const id = "J3DO5lonKTHIGI93e7ai";
     getData();
 
     updateData(id);
+    deleteData(id);
     if (toggleSignUp) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
