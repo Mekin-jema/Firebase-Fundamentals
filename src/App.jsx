@@ -1,15 +1,18 @@
-import { useState } from "react";
 import Authentication from "./Firebase/Authentication";
-
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Header from "./Components/Header";
+import About from "./Pages/About";
+import Home from "./Pages/Home";
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="App">
-      <header className="p-20">
-        <Authentication />
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/authentication" element={<Authentication />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
