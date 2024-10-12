@@ -2,17 +2,13 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
 } from "firebase/auth";
 import { useState } from "react";
-import { app } from "./ConfigureFirebase";
+// import { app } from "./ConfigureFirebase";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "./ConfigureFirebase";
 
-import { addUserToDatabase } from "./Database";
+import { addUserToDatabase, getData, updateData } from "./Database";
 const Authentication = () => {
   const [toggleSignUp, setToggleSignUp] = useState(true);
   const auth = getAuth();
@@ -35,36 +31,40 @@ const Authentication = () => {
     const username = formData.username;
     // Firebase Authentication createUserWithEmailAndPassword
     addUserToDatabase(username, email, password);
-    // if (toggleSignUp) {
-    //   createUserWithEmailAndPassword(auth, email, password)
-    //     .then((userCredential) => {
-    //       // Signed up
-    //       const user = userCredential.user;
+    const id = "EZpMLtBXp3J04tdPA1iM";
+    getData();
 
-    //       // ...
-    //     })
-    //     .then(() => {
-    //       alert("User Created Successfully");
-    //       setFormData({ email: "", password: "", username: "" });
-    //     })
-    //     .catch((error) => {
-    //       alert(error.message);
-    //       // ..
-    //     });
-    // } else {
-    //   signInWithEmailAndPassword(auth, email, password)
-    //     .then((userCredential) => {
-    //       alert("User Signed In Successfully");
-    //       // Signed in
-    //       const user = userCredential.user;
-    //       // ...
-    //     })
-    //     .catch((error) => {
-    //       alert(error.message);
-    //     });
+    updateData(id);
+    if (toggleSignUp) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
 
-    //   //Firebase Authentication signInWithEmailAndPassword
-    // }
+          // ...
+        })
+        .then(() => {
+          alert("User Created Successfully");
+          setFormData({ email: "", password: "", username: "" });
+        })
+        .catch((error) => {
+          alert(error.message);
+          // ..
+        });
+    } else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("User Signed In Successfully");
+          // Signed in
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+
+      //Firebase Authentication signInWithEmailAndPassword
+    }
   };
 
   return (

@@ -18,7 +18,7 @@ const SignUp = ({ handleChange, handleSubmit }) => {
           name="email"
           onChange={handleChange}
           placeholder="Email"
-          required
+          // required
           className="outline-blue-400 border  rounded-lg p-2"
         />
 
@@ -28,7 +28,7 @@ const SignUp = ({ handleChange, handleSubmit }) => {
           name="password"
           onChange={handleChange}
           placeholder="Password"
-          required
+          // required
           className="outline-blue-400 border  rounded-lg p-2"
         />
 
